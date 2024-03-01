@@ -51,15 +51,31 @@ app.delete('/api/persons/:id', (request, response) => {
 })
 
 app.post('/api/persons', (request, response) => {
-  const rndId = Math.floor(Math.random() * 300)
-  console.log(`ID randomized: ${rndId}`)
+  const body = request.body
+  
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error:'Name and/or Number is missing'
+    })
+  } else if (persons.find(p => p.name === body.name)) {
+      return response.status(400).json({
+        error: 'name must be unique'
+      })
+  } else {
+    const person = {
+      id: Math.floor(Math.random() * 300),
+      name: body.name,
+      number: body.number
+    }
 
-  const person = request.body
-  person.id = rndId
+    persons = persons.concat(person)
 
-  persons = persons.concat(person)
+    response.json(person)
+  }
 
-  response.json(person)
+  
+
+
 
 })
 
