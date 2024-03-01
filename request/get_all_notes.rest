@@ -10,6 +10,9 @@ Content-Type: application/json
 }
 
 ###
+HEAD http://localhost:3001/api/persons
+
+###
 GET http://localhost:3001/api/persons 
 
 ###
