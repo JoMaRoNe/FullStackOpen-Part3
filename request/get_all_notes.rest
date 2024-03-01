@@ -1,6 +1,15 @@
 DELETE  http://localhost:3001/api/persons/3
 
 ###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Tommy Cirulo",
+    "number": "654-14321654"
+}
+
+###
 GET http://localhost:3001/api/persons 
 
 ###
