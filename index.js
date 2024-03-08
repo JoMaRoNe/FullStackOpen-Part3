@@ -6,6 +6,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors())
+app.use(express.static('dist'))
 
 morgan.token('body', (request) => {
   return JSON.stringify(request.body)
@@ -34,9 +35,7 @@ let persons = [
       "name": "Mary Poppendieck", 
       "number": "39-23-6423122"
     }
-
 ]
-
 
 app.get('/api/persons', (request, response) => {
     response.json(persons)
