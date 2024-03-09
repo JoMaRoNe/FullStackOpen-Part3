@@ -93,7 +93,7 @@ const App = () => {
 
   const removePerson = (name,id) => {
       personService.remove(id)
-      setPersons(persons.filter((p) => p._id != id))
+      setPersons(persons.filter((p) => p.id != id))
       setNotification(`Deleted ${name}.`)
       setTimeout (() => { 
         setNotification(null)

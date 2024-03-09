@@ -6,9 +6,9 @@ const Persons = ({persons, search, handle}) => {
     return (
         <div>
             {personsToShow.map(person => 
-                <p key={person._id}>
+                <p key={person.id}>
                     {person.name} {person.number}  
-                    <button onClick={() =>handle(person.name, person._id)}>
+                    <button onClick={() =>handle(person.name, person.id)}>
                         delete
                     </button>
                 </p>
