@@ -98,8 +98,7 @@ const App = () => {
       setTimeout (() => { 
         setNotification(null)
       },5000)
-    }
-
+  }
     
   const handlePersonChange = (event) => {
       setNewName(event.target.value)
