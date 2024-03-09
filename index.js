@@ -53,6 +53,15 @@ app.get('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
+app.get('/info', (request, response, next) => {
+  Person.countDocuments({})
+    .then(people => {
+      const date = new Date().toString()
+      response.send(`<p>Phonebook has info for ${people} people</p><p>${date}</p>`)      
+    })
+    .catch(error => next(error))
+}) 
+
 app.post('/api/persons', (request, response) => {
   const body = request.body
   
