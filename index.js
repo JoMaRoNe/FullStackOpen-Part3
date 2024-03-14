@@ -31,7 +31,7 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError'){
-    return response.status(400).json({error: error.message})
+    return response.status(400).json({ error: error.message })
   }
 
   next(error)
@@ -59,19 +59,19 @@ app.get('/info', (request, response, next) => {
   Person.countDocuments({})
     .then(people => {
       const date = new Date().toString()
-      response.send(`<p>Phonebook has info for ${people} people</p><p>${date}</p>`)      
+      response.send(`<p>Phonebook has info for ${people} people</p><p>${date}</p>`)
     })
     .catch(error => next(error))
-}) 
+})
 
 app.post('/api/persons', (request, response, next) => {
   const { name, number } = request.body
-  
+
   const person = new Person({
     name: name,
     number: number,
   })
-  
+
   person.save()
     .then(savedPerson => {
       response.json(savedPerson)
@@ -81,17 +81,17 @@ app.post('/api/persons', (request, response, next) => {
 
 app.put('/api/persons/:id', (request, response, next) => {
   const { name, number } = request.body
-  
+  /*
   const person = {
     name: name,
     number: number,
   }
-
+  */
   Person.findByIdAndUpdate(
-    request.params.id, 
-    { name, number }, 
-    {new: true, runValidators: true, context: 'query'}
-    )
+    request.params.id,
+    { name, number },
+    { new: true, runValidators: true, context: 'query' }
+  )
     .then(updatedPerson => {
       response.json(updatedPerson)
     })
@@ -100,7 +100,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
-    .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
@@ -111,5 +111,5 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
