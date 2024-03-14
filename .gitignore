@@ -1,5 +1,6 @@
 .env
 node_modules
+FrontEnd-phonebook
 dist-ssr
 *.local
 logs
